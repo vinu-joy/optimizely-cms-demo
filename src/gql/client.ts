@@ -141,6 +141,26 @@ export const ExperienceOneDataFragmentDoc = gql`
   ...ExperienceData
 }
     `;
+export const LinkItemDataFragmentDoc = gql`
+    fragment LinkItemData on Link {
+  title
+  text
+  target
+  url {
+    ...LinkData
+  }
+}
+    `;
+export const PrideOfPlaceTypeDataFragmentDoc = gql`
+    fragment PrideOfPlaceTypeData on PrideOfPlaceType {
+  Title
+  description
+  ImageList {
+    ...LinkItemData
+  }
+  ...ExperienceData
+}
+    `;
 export const HomeSectionOneTypePropertyDataFragmentDoc = gql`
     fragment HomeSectionOneTypePropertyData on HomeSectionOneTypeProperty {
   MainTitle
@@ -181,16 +201,6 @@ export const IContentListItemFragmentDoc = gql`
   ...IContentData
 }
     `;
-export const LinkItemDataFragmentDoc = gql`
-    fragment LinkItemData on Link {
-  title
-  text
-  target
-  url {
-    ...LinkData
-  }
-}
-    `;
 export const getContentByIdDocument = gql`
     query getContentById($key: String!, $version: String, $locale: [Locales!], $path: String, $domain: String) {
   content: _Content(
@@ -207,6 +217,7 @@ export const getContentByIdDocument = gql`
       ...BlankExperienceData
       ...DestinationPageTypeData
       ...ExperienceOneData
+      ...PrideOfPlaceTypeData
       ...HomePageTypeData
     }
   }
@@ -230,6 +241,8 @@ ${ExperienceElementTestDataFragmentDoc}
 ${TitleOneDataFragmentDoc}
 ${DestinationPageTypeDataFragmentDoc}
 ${ExperienceOneDataFragmentDoc}
+${PrideOfPlaceTypeDataFragmentDoc}
+${LinkItemDataFragmentDoc}
 ${HomePageTypeDataFragmentDoc}
 ${HomeSectionOneTypePropertyDataFragmentDoc}`;
 export const getContentByPathDocument = gql`
@@ -244,6 +257,7 @@ export const getContentByPathDocument = gql`
       ...BlankExperienceData
       ...DestinationPageTypeData
       ...ExperienceOneData
+      ...PrideOfPlaceTypeData
       ...HomePageTypeData
     }
   }
@@ -263,6 +277,8 @@ ${ExperienceElementTestDataFragmentDoc}
 ${TitleOneDataFragmentDoc}
 ${DestinationPageTypeDataFragmentDoc}
 ${ExperienceOneDataFragmentDoc}
+${PrideOfPlaceTypeDataFragmentDoc}
+${LinkItemDataFragmentDoc}
 ${HomePageTypeDataFragmentDoc}
 ${HomeSectionOneTypePropertyDataFragmentDoc}`;
 export const getContentTypeDocument = gql`
