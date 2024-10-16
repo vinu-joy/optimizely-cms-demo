@@ -1,6 +1,6 @@
 import { OptimizelyNextPage as CmsComponent } from "@remkoj/optimizely-cms-nextjs";
-import { BlankExperienceDataFragmentDoc, type BlankExperienceDataFragment } from "@/gql/graphql";
-import { type Maybe, type ICompositionNode, type ExperienceDataFragment } from "@/gql/graphql";
+import { getFragmentData } from "@/gql";
+import { BlankExperienceDataFragmentDoc, ExperienceDataFragmentDoc, CompositionDataFragmentDoc, type BlankExperienceDataFragment } from "@/gql/graphql";
 import { OptimizelyComposition, isNode, CmsEditable } from "@remkoj/optimizely-cms-react/rsc";
 import { getSdk } from "@/gql"
 
@@ -9,7 +9,7 @@ import { getSdk } from "@/gql"
  * An experience without a predefined layout.
  */
 export const BlankExperienceExperience : CmsComponent<BlankExperienceDataFragment> = ({ data }) => {
-    const composition = (data as ExperienceDataFragment).composition as Maybe<ICompositionNode>
+    const composition = getFragmentData(CompositionDataFragmentDoc, getFragmentData(ExperienceDataFragmentDoc, data)?.composition)
     return <CmsEditable as="div" className="mx-auto px-2 container" cmsFieldName="unstructuredData">
         { composition && isNode(composition) && <OptimizelyComposition node={composition} /> }
     </CmsEditable>
